@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "rock_pico")(type "KiCad")(uri "${KIPRJMOD}/rock_pico.kicad_sym")(options "")(descr ""))
+)

@@ -1,0 +1,229 @@
+(footprint "PJ342"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(descr "PJ311 6pin SMD 3.5mm stereo headphones jack.")
+	(tags "headphones jack plug stereo 3.5mm PJ311")
+	(property "Reference" "REF**"
+		(at 0 14.5 0)
+		(layer "F.SilkS")
+		(uuid "9ba24743-c989-40df-8dd9-797bdcee21d9")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "PJ342"
+		(at 0 7.17 0)
+		(layer "F.Fab")
+		(uuid "1763c102-4caa-4fc0-b7b2-f693a1fcdb85")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "3f45da9c-5ba7-4c11-9325-686a45459370")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "98a57be0-f5c8-46a2-bc8a-5f6680f7f189")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd)
+	(fp_line
+		(start -3.2 0.4)
+		(end -3.2 1)
+		(stroke
+			(width 0.15)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "dcd33269-2b6c-4df2-b0c3-d8344052770f")
+	)
+	(fp_line
+		(start -3.2 0.4)
+		(end 3.2 0.4)
+		(stroke
+			(width 0.15)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "e964bf70-64bd-464d-8482-ac3df9e14818")
+	)
+	(fp_line
+		(start -3.2 3.1)
+		(end -3.2 4.4)
+		(stroke
+			(width 0.15)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "06dd5db9-e019-44a6-886c-3bcafea3b17f")
+	)
+	(fp_line
+		(start -3.2 6.5)
+		(end -3.2 9.9)
+		(stroke
+			(width 0.15)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "8d907f05-c485-42e9-90ea-6129d3365e57")
+	)
+	(fp_line
+		(start -3.2 12)
+		(end 2.1 12)
+		(stroke
+			(width 0.15)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "cbbd0485-adbb-4ac6-8f1c-424c1a6251f5")
+	)
+	(fp_line
+		(start 3.2 0.4)
+		(end 3.2 1.2)
+		(stroke
+			(width 0.15)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "b2af3e2d-539a-4e3f-82da-7fb3aeb85a7b")
+	)
+	(fp_line
+		(start 3.2 3.3)
+		(end 3.2 8.1)
+		(stroke
+			(width 0.15)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "ba0ccadf-568a-4e1e-af75-69f339a1f6b2")
+	)
+	(fp_line
+		(start 3.2 10.1)
+		(end 3.2 10.5)
+		(stroke
+			(width 0.15)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "1ed8cc8b-2a77-4d3b-ae9d-96c189dac2df")
+	)
+	(fp_rect
+		(start -3 -2)
+		(end 3 0)
+		(stroke
+			(width 0.15)
+			(type default)
+		)
+		(fill no)
+		(layer "Cmts.User")
+		(uuid "a0773bb0-38e8-4a11-8d1f-29b62ec09076")
+	)
+	(fp_circle
+		(center 0 2.5)
+		(end 0.75 2.5)
+		(stroke
+			(width 0.15)
+			(type default)
+		)
+		(fill no)
+		(layer "Edge.Cuts")
+		(uuid "bbb54a09-f304-443a-a472-7be04733e9b5")
+	)
+	(fp_circle
+		(center 0 9.5)
+		(end 0.75 9.5)
+		(stroke
+			(width 0.15)
+			(type default)
+		)
+		(fill no)
+		(layer "Edge.Cuts")
+		(uuid "70c6ae16-e29a-4b78-8974-975d82036a3f")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 6.7 0)
+		(layer "F.Fab")
+		(uuid "8b7ad9d1-3bda-4c2a-85da-7ecde24ade92")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" smd rect
+		(at -3.5 2.05)
+		(size 2.1 1.5)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "79e8e913-70a2-4780-9fe3-1c8429751f3a")
+	)
+	(pad "2" smd rect
+		(at 3.5 2.3)
+		(size 2.1 1.5)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "e6f72c15-75ba-4d37-b2c3-ca3dfedfed4d")
+	)
+	(pad "3" smd rect
+		(at -3.5 5.45)
+		(size 2.1 1.5)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "a1bc60a7-bbcc-4e16-9244-bf8798519482")
+	)
+	(pad "4" smd rect
+		(at 3.5 9.15)
+		(size 2.1 1.5)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "185c6f1a-4be3-4057-b9cd-4e5d1091f6b4")
+	)
+	(pad "5" smd rect
+		(at -3.5 10.95)
+		(size 2.1 1.5)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "dc5ec297-5c9c-44f3-a85c-33f2a81990ca")
+	)
+	(pad "6" smd rect
+		(at 3.5 11.45)
+		(size 2.1 1.5)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "92305bb4-0a46-4bb8-bb5c-a797dda4a7be")
+	)
+	(embedded_fonts no)
+	(model "${KIPRJMOD}/3dmodels/PJ311D_WOPos.STEP"
+		(offset
+			(xyz 0 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz -90 -0 -180)
+		)
+	)
+)

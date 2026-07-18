@@ -1,0 +1,184 @@
+(footprint "WS2812B-2835-1615"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(property "Reference" "REF**"
+		(at 0 -3.45 0)
+		(layer "F.SilkS")
+		(uuid "e2c229b7-0f91-403e-a4c6-2aa96df9a482")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "WS2812B-2835-1615"
+		(at 0 3.45 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "0cdcf19b-5977-49ef-be54-419dc006f694")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "102f9af5-4926-4107-90a9-306eafa9bfdd")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "1ae8d9b7-a51f-4788-9cf2-cd770a7c01a6")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd)
+	(fp_line
+		(start -3 -1.75)
+		(end -3 1.8)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "1d58f96b-ee44-49cf-8d5f-9a0008516ff6")
+	)
+	(fp_line
+		(start -3 -1.75)
+		(end 3.05 -1.75)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "f1cf154e-b063-4f77-8995-ca5034951982")
+	)
+	(fp_line
+		(start -3 1.8)
+		(end 2.45 1.8)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "9eb6ad99-ac87-4d4d-880d-ab0453e10ef0")
+	)
+	(fp_line
+		(start 0 1.875)
+		(end -0.4 1.5)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "3e05fcd8-138a-44ec-9e22-c76f79aa025a")
+	)
+	(fp_line
+		(start 0 1.875)
+		(end 0.4 1.5)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "c71e951e-2a9e-4ae3-9e6f-4274f78fadd2")
+	)
+	(fp_line
+		(start 2.45 1.8)
+		(end 3.05 1.2)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "4c210859-6421-4022-8a17-2a8e5e4f929d")
+	)
+	(fp_line
+		(start 3.05 -1.75)
+		(end 3.05 1.2)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "5a02adb6-cc9d-4758-9c52-145d0ed5a678")
+	)
+	(pad "G" smd rect
+		(at 0.5 0.8 90)
+		(size 1 0.6)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "93bd59d7-b195-46c7-b040-61beac8d9e30")
+	)
+	(pad "G" smd rect
+		(at 1.6 0.9)
+		(size 1.8 1)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "8ed4f35c-f2de-440f-8e33-c489bf529100")
+	)
+	(pad "I" smd rect
+		(at 0.5 -0.8 90)
+		(size 1 0.6)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "02278cf9-f6e4-46c3-b808-d40fe5a22666")
+	)
+	(pad "I" smd rect
+		(at 1.6 -0.9)
+		(size 1.8 1)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "2bf938dd-562d-4a98-90c3-767c87723d07")
+	)
+	(pad "O" smd rect
+		(at -1.6 0.9)
+		(size 1.8 1)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "e152eda4-1abc-44ee-a5c2-c1e2c7168915")
+	)
+	(pad "O" smd rect
+		(at -0.5 0.8 90)
+		(size 1 0.6)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "8f04c95f-0c7d-4d34-8f3a-8cc136b0016c")
+	)
+	(pad "V" smd rect
+		(at -1.6 -0.9)
+		(size 1.8 1)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "717c99df-1956-4765-afce-e90c2d34a2a4")
+	)
+	(pad "V" smd rect
+		(at -0.5 -0.8 90)
+		(size 1 0.6)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "932716f2-6387-4e22-abb8-e9cd9324b9e3")
+	)
+	(embedded_fonts no)
+	(model "D:/Code/groove_pico/PCB/Lib/3dmodels/SMD WS2812B-3535.step"
+		(offset
+			(xyz 0 0 2)
+		)
+		(scale
+			(xyz 0.85 1 1)
+		)
+		(rotate
+			(xyz -90 0 -90)
+		)
+	)
+)
