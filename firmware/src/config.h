@@ -18,6 +18,11 @@ typedef struct __attribute__((packed)) {
     struct {
         uint8_t level;
     } light;
+    struct {
+        uint8_t mode : 1;
+        uint8_t invert : 1;
+        uint8_t reserved : 6;
+    } pedal;
     uint8_t theme;
 } rock_cfg_t;
 

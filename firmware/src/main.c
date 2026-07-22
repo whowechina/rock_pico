@@ -14,6 +14,7 @@
 #include "pico/bootrom.h"
 
 #include "hardware/clocks.h"
+#include "hardware/flash.h"
 #include "hardware/gpio.h"
 #include "hardware/sync.h"
 #include "hardware/structs/ioqspi.h"
@@ -31,6 +32,7 @@
 
 #include "light.h"
 #include "button.h"
+#include "pedal.h"
 
 
 typedef struct {
@@ -53,13 +55,13 @@ static struct {
         { HUE_BLUE, 240, 255 },
     },
     .off = {
-        { HUE_RED, 0, 96 },
-        { HUE_RED, 0, 96 },
-        { HUE_BLUE, 0, 96 },
-        { HUE_BLUE, 0, 96 },
-        { HUE_RED, 0, 96 },
-        { HUE_BLUE, 0, 96 },
-        { HUE_BLUE, 0, 96 },
+        { HUE_RED, 0, 36 },
+        { HUE_RED, 0, 36 },
+        { HUE_BLUE, 0, 36 },
+        { HUE_BLUE, 0, 36 },
+        { HUE_RED, 0, 36 },
+        { HUE_BLUE, 0, 36 },
+        { HUE_BLUE, 0, 36 },
     }
 };
 
@@ -90,15 +92,17 @@ static void run_lights()
     light_render();
 }
 
-static mutex_t core1_io_lock;
+static void core1_init()
+{
+    flash_safe_execute_core_init();
+}
+
 static void core1_loop()
 {
+    core1_init();
     while (1) {
-        if (mutex_try_enter(&core1_io_lock, NULL)) {
-            run_lights();
-            light_update();
-            mutex_exit(&core1_io_lock);
-        }
+        run_lights();
+        light_update();
         cli_fps_count(1);
         sleep_us(700);
     }
@@ -117,7 +121,9 @@ static void hid_update()
     }
 
     uint64_t now = time_us_64();
-    hid_joy.buttons = button_read();
+    uint16_t buttons = button_read();
+    hid_joy.buttons = (buttons & 0x7f) | (pedal_is_active(buttons) ? 0x80 : 0);
+
     if ((memcmp(&hid_joy, &hid_joy_sent, sizeof(hid_joy)) == 0) &&
         (now - last_report_time < 10000)) {
         return;
@@ -186,11 +192,11 @@ void init()
     stdio_init_all();
 
     config_init();
-    mutex_init(&core1_io_lock);
     savedata_init(0xca4ccabb);
 
     light_init();
     button_init();
+    pedal_init();
 
     cli_init("rock_pico>", "\n   << Rock Pico Controller >>\n"
                             " https://github.com/whowechina\n\n");

@@ -15,12 +15,21 @@ static rock_cfg_t default_cfg = {
     .light = {
         .level = 128,
     },
+    .pedal = {
+        .mode = 0,
+        .invert = 0,
+    },
 };
 
 rock_runtime_t rock_runtime;
 
 static void config_loaded()
 {
+    if (rock_cfg->pedal.mode > 1) {
+        rock_cfg->pedal.mode = 0;
+    }
+    rock_cfg->pedal.invert = rock_cfg->pedal.invert ? 1 : 0;
+    rock_cfg->pedal.reserved = 0;
 }
 
 void config_changed()
