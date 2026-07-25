@@ -18,7 +18,7 @@
 
 static const uint8_t button_gpio[] = BUTTON_DEF;
 
-#define BUTTON_NUM (sizeof(button_gpio))
+#define BUTTON_NUM (count_of(button_gpio))
 
 static bool sw_val[BUTTON_NUM]; /* true if pressed */
 static uint64_t sw_freeze_time[BUTTON_NUM];
@@ -38,13 +38,7 @@ void button_init()
     }
 
     /* make valid initial reading */
-    button_reading = 0;
-    for (int i = 0; i < BUTTON_NUM; i++) {
-        sw_val[i] = !gpio_get(button_gpio[i]);
-        if (sw_val[i]) {
-            button_reading |= (1 << i);
-        }
-    }
+    button_update();
 }
 
 uint8_t button_num()
@@ -53,7 +47,7 @@ uint8_t button_num()
 }
 
 /* If a switch flips, it freezes for a while */
-#define DEBOUNCE_FREEZE_TIME_US 3000
+#define DEBOUNCE_FREEZE_TIME_US 20000
 void button_update()
 {
     uint64_t now = time_us_64();

@@ -9,11 +9,6 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-typedef struct {
-    uint8_t rgb_hsv; // 0: RGB, 1: HSV
-    uint8_t val[3]; // RGB or HSV
-} rgb_hsv_t;
-
 typedef struct __attribute__((packed)) {
     struct {
         uint8_t level;
@@ -23,6 +18,11 @@ typedef struct __attribute__((packed)) {
         uint8_t invert : 1;
         uint8_t reserved : 6;
     } pedal;
+    struct {
+        bool keyboard;
+        bool joy;
+        uint8_t keycode[8];
+    } hid;
     uint8_t theme;
 } rock_cfg_t;
 

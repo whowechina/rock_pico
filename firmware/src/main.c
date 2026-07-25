@@ -112,25 +112,61 @@ struct __attribute__((packed)) {
     uint16_t buttons;
 } hid_joy, hid_joy_sent = {0};
 
+struct __attribute__((packed)) {
+    uint8_t modifier;
+    uint8_t reserved;
+    uint8_t keys[16]; // usage bitset for 0x00..0x7f
+} hid_kbd, hid_kbd_sent = {0};
+
 static void hid_update()
 {
-    static uint64_t last_report_time = 0;
+    static uint64_t last_report_key_time = 0;
+    static uint64_t last_report_joy_time = 0;
 
     if (!tud_hid_ready()) {
         return;
     }
 
     uint64_t now = time_us_64();
-    uint16_t buttons = button_read();
-    hid_joy.buttons = (buttons & 0x7f) | (pedal_is_active(buttons) ? 0x80 : 0);
 
-    if ((memcmp(&hid_joy, &hid_joy_sent, sizeof(hid_joy)) == 0) &&
-        (now - last_report_time < 10000)) {
-        return;
+    uint16_t buttons = button_read();
+    buttons = (buttons & 0x7f) | (pedal_is_active(buttons) ? 0x80 : 0);
+
+    if (rock_cfg->hid.joy) {
+        hid_joy.buttons = buttons;
+
+        if ((memcmp(&hid_joy, &hid_joy_sent, sizeof(hid_joy)) != 0) ||
+            (now - last_report_joy_time > 10000)) {
+            if (tud_hid_report(REPORT_ID_JOYSTICK, &hid_joy, sizeof(hid_joy))) {
+                hid_joy_sent = hid_joy;
+                last_report_joy_time = now;
+            }
+        }
     }
-    last_report_time = now;
-    if (tud_hid_report(REPORT_ID_JOYSTICK, &hid_joy, sizeof(hid_joy))) {
-        hid_joy_sent = hid_joy;
+
+    if (rock_cfg->hid.keyboard) {
+        memset(&hid_kbd, 0, sizeof(hid_kbd));
+
+        for (int i = 0; i < 8; i++) {
+            if (!(buttons & (1 << i))) {
+                continue;
+            }
+
+            uint8_t keycode = rock_cfg->hid.keycode[i];
+            if (keycode == 0 || keycode > 0x7f) {
+                continue;
+            }
+
+            hid_kbd.keys[keycode / 8] |= 1 << (keycode % 8);
+        }
+
+        if ((memcmp(&hid_kbd, &hid_kbd_sent, sizeof(hid_kbd)) != 0) ||
+            (now - last_report_key_time > 10000)) {
+            if (tud_hid_report(REPORT_ID_KEYBOARD, &hid_kbd, sizeof(hid_kbd))) {
+                hid_kbd_sent = hid_kbd;
+                last_report_key_time = now;
+            }
+        }
     }
 }
 
@@ -155,28 +191,30 @@ static void core0_loop()
     }
 }
 
-/* if certain key pressed when booting, enter update mode */
 static void update_check()
 {
-    const uint8_t pins[] = BUTTON_DEF;
-    int pressed = 0;
-    for (int i = 0; i < count_of(pins); i++) {
-        uint8_t gpio = pins[i];
-        gpio_init(gpio);
-        gpio_set_function(gpio, GPIO_FUNC_SIO);
-        gpio_set_dir(gpio, GPIO_IN);
-        gpio_pull_up(gpio);
-        sleep_ms(1);
-        if (!gpio_get(gpio)) {
-            pressed++;
-        }
-    }
-
-    if (pressed >= 3) {
+    uint16_t buttons = button_read();
+    if ((buttons & 0x0e) == 0x0e) {
         sleep_ms(100);
         reset_usb_boot(0, 2);
         return;
     }
+}
+
+static void hid_mode_check()
+{
+    uint16_t buttons = button_read();
+    if (!(buttons & 0x01)) {
+        return;
+    }
+
+    bool l1 = buttons & 0x02;
+    bool l2 = buttons & 0x04;
+    bool l3 = buttons & 0x08;
+
+    rock_cfg->hid.joy = l1 || l2;
+    rock_cfg->hid.keyboard = l1 || l3;
+    config_changed();
 }
 
 void init()
@@ -186,6 +224,7 @@ void init()
 
     board_init();
 
+    button_init();
     update_check();
 
     tusb_init();
@@ -195,8 +234,9 @@ void init()
     savedata_init(0xca4ccabb);
 
     light_init();
-    button_init();
     pedal_init();
+
+    hid_mode_check();
 
     cli_init("rock_pico>", "\n   << Rock Pico Controller >>\n"
                             " https://github.com/whowechina\n\n");
