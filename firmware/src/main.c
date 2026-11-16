@@ -194,7 +194,7 @@ static void core0_loop()
 static void update_check()
 {
     uint16_t buttons = button_read();
-    if ((buttons & 0x0e) == 0x0e) {
+    if ((buttons & 0x0f) == 0x0f) {
         sleep_ms(100);
         reset_usb_boot(0, 2);
         return;
